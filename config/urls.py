@@ -11,4 +11,5 @@ urlpatterns = [
 ]
 
 handler404 = 'common.views.page_not_found'
-handler500 = 'common.views.Internal_Server_Error'
+# handler500 = 'common.views.Internal_Server_Error'
+# 오류 발생
