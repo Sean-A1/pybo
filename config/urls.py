@@ -1,13 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
 from pybo.views import base_views
+from common import views as common_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pybo/', include('pybo.urls')), 
-    path('common/', include('common.urls')),
-    path('', base_views.index, name='index'),  # '/' 에 해당되는 path
+    path('', common_views.home, name='home'),  # 루트 URL → 홈화면
+    
+    path('pybo/', include('pybo.urls')),       # 기존 게시판 URL은 /pybo/ 로 진입
+    path('common/', include('common.urls')),   # 로그인/회원가입 등
+    
+    # allauth
+    path('accounts/', include('allauth.urls')),
 ]
 
 handler404 = 'common.views.page_not_found'

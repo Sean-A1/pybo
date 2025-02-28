@@ -33,13 +33,42 @@ ALLOWED_HOSTS = ['43.201.231.69']
 INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+     # 사이트 식별을 위한
+    'django.contrib.sites',
+
+    # allauth 관련 앱들
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    # provider
+    'allauth.socialaccount.providers.google',
+    
 ]
+
+
+
+# 바로 실제 OAuth 프로세스를 시작, “Google로 로그인하시겠습니까? 계속” 같은 확인 화면이 생략
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+
+# 인증 백엔드 설정
+AUTHENTICATION_BACKENDS = (
+    # Django 기본 인증
+    'django.contrib.auth.backends.ModelBackend',
+    # django-allauth
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +78,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # allauth 최신 버전에서 요구
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -61,7 +93,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', # allauth에서 필요
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -129,6 +161,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 로그인 성공후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # 개발 편의를 위해 이메일 검증 끔 (운영 시 조정)
 
 LOGGING = {
     'version': 1,

@@ -1,7 +1,12 @@
 <!-- 네비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'pybo:index' %}">Pybo</a>
+
+        <!-- 왼쪽 로고/사이트명 -->
+        <a class="navbar-brand" href="{% url 'home' %}">사이트</a>
+        <!-- ↑ 'home' 이라는 이름의 URL 패턴이 있어야 함 (config/urls.py 등에서 설정) -->
+
+
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -10,27 +15,97 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- 네비게이션 바 항목들 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- 로그인 화면으로 진입 -->
+            <!-- 왼쪽 메뉴 -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- AI 예측 -->
                 <li class="nav-item">
-                    <!-- 로그인이 된 상태면 "로그아웃" 링크로 바꿈-->
-                    {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
-                    <!-- "로그인" 링크-->
-                    {% else %}
+                    <a class="nav-link" href="#">AI 예측</a>
+                </li>
+
+                <!-- 기록실 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">기록실</a>
+                </li>
+
+                <!-- 게시판 (Pybo) -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pybo:index' %}">게시판</a>
+                </li>
+
+                <!-- 콘텐츠 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">콘텐츠</a>
+                </li>
+
+                <!-- 시즌정보 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">시즌정보</a>
+                </li>
+
+                <!-- 팀정보 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">팀정보</a>
+                </li>
+
+                <!-- 선수정보 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">선수정보</a>
+                </li>
+
+                <!-- 경기일정 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">경기일정</a>
+                </li>
+
+                <!-- 스페셜 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">스페셜</a>
+                </li>
+
+                <!-- 추가정보 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">추가정보</a>
+                </li>
+
+                <!-- 공지사항 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">공지사항</a>
+                </li>
+            </ul>
+
+
+            <!-- 오른쪽 메뉴: 로그인/회원가입 or 로그아웃 -->
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <!-- 로그인 상태: 로그아웃 표시 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'common:profile' %}">
+                        {{ user.username }} 마이페이지
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'common:logout' %}">
+                        로그아웃
+                    </a>
+                </li>
+                {% else %}
+                <!-- 로그아웃 상태: 로그인/회원가입 표시 -->
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
-                    {% endif %}
                 </li>
-            <!-- 로그인 화면으로 진입 끝 -->
-                <!-- 로그아웃 상태에서 회원가입을 위한 링크 -->
-                <li>
-                    {% if not user.is_authenticated %}
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
-                    {% endif %}
                 </li>
-                <!-- 회원가입을 위한 링크 끝-->
-            </ul>           
+
+
+                
+
+                {% endif %}
+            </ul>          
         </div>
     </div>
 </nav>

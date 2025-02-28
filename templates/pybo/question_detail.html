@@ -30,6 +30,7 @@
                 <div class="badge bg-light text-dark p-2 text-start">
                     <div class="mb-2">{{ question.author.username }}</div> <!-- 글쓴이 -->
                     <div>{{ question.create_date }}</div>
+                    <div class="mb-2">조회수: {{ question.view_count }}</div> <!-- 조회수 -->
                 </div>
             </div>
         </div>     
@@ -56,9 +57,35 @@
             {% endif %}
         </div>
     </div>
+    <!-- 질문 끝 -->
+
     <!-- 답변 -->
-    <h5 class="border-bottom my-3 py-2">{{question.answer_set.count}}개의 답변이 있습니다.</h5>
-    {% for answer in question.answer_set.all %}
+    <!-- 답변 정렬 옵션 -->
+    <div class="my-3">
+        <strong>정렬: </strong>
+        <!-- sort 값에 따라 링크 하이라이트를 달아줄 수도 있음 (선택적) -->
+        <a href="?sort=voter{% if page|default_if_none:'' %}&page={{ page }}{% endif %}"
+           class="{% if sort == 'voter' %}fw-bold text-success{% endif %}">
+           추천순
+        </a>
+        |
+        <a href="?sort=recent{% if page|default_if_none:'' %}&page={{ page }}{% endif %}"
+           class="{% if sort == 'recent' %}fw-bold text-success{% endif %}">
+           최신순
+        </a>
+    </div>
+
+    <!-- 답변 목록 헤더 -->
+    <h5 class="border-bottom my-3 py-2">
+        {% if answer_list.paginator.count %} 
+            {{answer_list.paginator.count}}개의 답변이 있습니다.
+        {% else %}
+            답변이 없습니다.
+        {% endif %}
+    </h5>
+
+    <!-- 답변 목록 -->
+    {% for answer in answer_list %}
     <a id="answer_{{ answer.id }}"></a>
     <div class="card my-3">
         <div class="card-body">
@@ -97,6 +124,46 @@
         </div>
     </div>
     {% endfor %}
+
+    <!-- 페이지네이션 -->
+    {% if answer_list.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if answer_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" 
+                   href="?page={{ answer_list.previous_page_number }}&sort={{ sort }}">
+                    이전
+                </a>
+            </li>
+            {% endif %}
+
+            {% for i in answer_list.paginator.page_range %}
+                {% if answer_list.number == i %}
+                <!-- 현재 페이지 -->
+                <li class="page-item active">
+                    <a class="page-link">{{ i }}</a>
+                </li>
+                {% else %}
+                <!-- 링크로 이동 가능한 페이지 -->
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}&sort={{ sort }}">{{ i }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if answer_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" 
+                   href="?page={{ answer_list.next_page_number }}&sort={{ sort }}">
+                    다음
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
     <!-- 답변 등록 -->
     <form action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
         {% csrf_token %}
@@ -125,6 +192,7 @@
     </form>
 </div>
 {% endblock %}
+
 {% block script %}
 <script type='text/javascript'>
 
