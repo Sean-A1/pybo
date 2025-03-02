@@ -100,17 +100,27 @@ ubuntu@jumpto:~$ mysite
 
 
 ---------------------------------------------------------로컬 환경에서 파일 수정 후 서버에 적용----------------------------------
-(mysite) c:\projects\mysite>git commit -a -m "315fun"
+(mysite) c:\projects\mysite>pip freeze > requirements.txt
+(mysite) c:\projects\mysite>git add .
+(mysite) c:\projects\mysite>git commit -m "package"
 (mysite) c:\projects\mysite>git push
 
 (mysite) ubuntu@jumpto:~/projects/mysite$ git pull
+(mysite) ubuntu@jumpto:~/projects/mysite$ pip install -r requirements.txt
 (mysite) ubuntu@jumpto:~/projects/mysite$ sudo systemctl restart mysite.service
 
+(mysite) ubuntu@jumpto:~/projects/mysite$ python manage.py migrate
 
+---------------------------------------------------------MobaXterm Session stopped 해결----------------------------------
 
+Network error: Connection timed out
+session stoped
 
+---------------------------------------------------------logging----------------------------------
+(mysite) ubuntu@jumpto:~/projects/mysite$ cd logs
+(mysite) ubuntu@jumpto:~/projects/mysite/logs$ tail -f mysite.log
 
-
+(mysite) ubuntu@jumpto:~/projects/mysite/logs$ cat mysite.log
 
 
 
@@ -118,12 +128,14 @@ ubuntu@jumpto:~$ mysite
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< QnA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Django 의 pybo 앱과, 자동으로 설치되는 앱인 Installed Apps (admin, auth, 등등) 은 다른가?
+
 Django Form 과 <form> 태그는 다른가?
+
 가상환경에 진입해서 cmd 디렉토리 명령어로 폴더, 파일을 만드는 것은 에디터에서 혹은 파일 탐색기에서 직접 폴더, 파일을 만드는 것과 차이가 있는가? 나중에 영향이 있는가?
 @ 애너테이션이란?
 
 
-mobaXterm
+pybo 에 admin 과 다른 app의 admin 을 전부 구별해야 하는가?
 
 
 4-17 django.db.utils.OperationalError FATAL:  password authentication failed 오류 해결
