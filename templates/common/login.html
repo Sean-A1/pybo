@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static socialaccount %}  <!-- django-allauth 템플릿 태그 + static 태그 로드 -->
 
 {% block content %}
 <div class="container my-3">
@@ -25,17 +24,7 @@
 
         <button type="submit" class="btn btn-primary">로그인</button>
 
-        <!-- SNS 간편 로그인 섹션 -->
-        <div class="mt-4 text-center">
-            <p class="fw-bold mb-2">SNS 간편 로그인</p>
-
-            <!-- 구글 로그인 아이콘/링크 -->
-            <a href="{% provider_login_url 'google' %}">
-                <img src="{% static 'images/google_icon.png' %}" alt="Google 로그인" width="40" />
-            </a>
-            
-            
-        </div>
+        
     </form>
 </div>
 {% endblock %}

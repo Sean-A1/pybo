@@ -10,9 +10,7 @@ urlpatterns = [
     
     path('pybo/', include('pybo.urls')),       # 기존 게시판 URL은 /pybo/ 로 진입
     path('common/', include('common.urls')),   # 로그인/회원가입 등
-    
-    # allauth
-    path('accounts/', include('allauth.urls')),
+
 ]
 
 handler404 = 'common.views.page_not_found'
