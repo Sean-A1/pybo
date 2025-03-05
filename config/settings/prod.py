@@ -1,7 +1,7 @@
 import environ
 from .base import *
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['43.201.231.69', 'tukcappybo.xyz']
 
 STATIC_ROOT = BASE_DIR / 'pybo/static/'

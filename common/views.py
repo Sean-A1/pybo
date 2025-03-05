@@ -51,8 +51,3 @@ def profile(request):
     }
     return render(request, 'common/profile.html', context)
 
-def page_not_found(request, exception):
-    return render(request, 'common/404.html', {})
-
-def Internal_Server_Error(request, exception):
-    return render(request, 'common/500.html', {})
