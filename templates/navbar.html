@@ -31,9 +31,14 @@
                     <a class="nav-link" href="#">AI Score 랭킹</a>
                 </li>
 
-                <!-- 정보 -->
+                <!-- 팀/선수 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">팀/선수 정보</a>
+                    <a class="nav-link" href="{% url 'team:team_list' %}">팀/선수</a>
+                </li>
+
+                <!-- 경기 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">경기</a>
                 </li>
 
                 <!-- 게시판-->
@@ -41,10 +46,7 @@
                     <a class="nav-link" href="{% url 'pybo:index' %}">게시판</a>
                 </li>
 
-                <!-- 공지사항 -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">공지사항</a>
-                </li>
+                
             </ul>
 
 
