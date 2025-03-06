@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'team.apps.TeamConfig',
+    'match.apps.MatchConfig',   
     'pybo.apps.PyboConfig',
     
     'common.apps.CommonConfig',

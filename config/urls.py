@@ -13,6 +13,7 @@ urlpatterns = [
     
     
     path('team/', include('team.urls')),
+    path('match/', include('match.urls')),
     path('pybo/', include('pybo.urls')),       # 기존 게시판 URL은 /pybo/ 로 진입
     
     path('common/', include('common.urls')),   # 로그인/회원가입 등
