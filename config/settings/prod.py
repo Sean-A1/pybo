@@ -3,6 +3,8 @@ from .base import *
 
 DEBUG = False
 ALLOWED_HOSTS = ['43.201.231.69', 'tukcappybo.xyz']
+SITE_TITLE = "Web"
+
 
 STATIC_ROOT = BASE_DIR / 'pybo/static/'
 STATICFILES_DIRS = []

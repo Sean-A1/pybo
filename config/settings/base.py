@@ -68,6 +68,9 @@ TEMPLATES = [
                 'django.template.context_processors.request', # allauth에서 필요
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                # 추가
+                'config.context_processors.site_title',
             ],
         },
     },
