@@ -15,6 +15,8 @@ COPY . /app/
 WORKDIR /app
 COPY . .
 
+# logs 폴더 추가 (중요!)
+RUN mkdir -p /app/logs
 
 # Django 환경 설정 추가
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
