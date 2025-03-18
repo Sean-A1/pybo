@@ -8,3 +8,5 @@ services:
       - .:/app  # 로컬 코드를 컨테이너 내부로 마운트
     ports:
       - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.local
